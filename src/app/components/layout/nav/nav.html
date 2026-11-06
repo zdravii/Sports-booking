@@ -1,0 +1,25 @@
+<nav class="container d-flex justify-content-between navbar navbar-expand-lg navbar-light bg-light">
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav">
+      @for (item of visibleNavLinks; track item.label) {
+        @if (item.action !== 'logout') {
+          <li class="nav-item">
+            <a class="nav-link" [routerLink]="item.path" routerLinkActive="active">{{ item.label }}</a>
+          </li>
+        }
+      }
+    </ul>
+  </div>
+
+  <div>
+    <ul class="navbar-nav">
+      @for (item of visibleNavLinks; track item.label) {
+        @if (item.action === 'logout') {
+          <li class="nav-item">
+            <button class="nav-link btn btn-link" (click)="onNavClick(item)">{{ item.label }}</button>
+          </li>
+        }
+      }
+    </ul>
+  </div>
+</nav>

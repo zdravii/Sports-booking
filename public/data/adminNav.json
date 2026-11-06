@@ -1,0 +1,8 @@
+[
+    {"label":"Centers","path":"/admin/centers"},
+    {"label":"Sports","path":"/admin/sports"},
+    {"label":"Courts","path":"/admin/courts"},
+    {"label":"Users","path":"/admin/users"},
+    {"label":"Reservations","path":"/admin/reservations"},
+    {"label":"AuthLog","path":"/admin/auditLogs"}
+]

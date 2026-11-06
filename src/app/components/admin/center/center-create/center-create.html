@@ -1,0 +1,28 @@
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-8">
+      <form [formGroup]="createForm" (ngSubmit)="onSubmit()">
+        <app-form-input
+          [control]="name"
+          label="Center name :"
+          placeholder="Center name"
+          [errorMessage]="{
+            required: 'Name is required',
+            minlength: 'Name cannnot contain less than 4 characters',
+            maxlength: 'Name cannnot contain more than 30 characters',
+          }"
+        ></app-form-input>
+        <app-form-input
+          [control]="address"
+          label="Address :"
+          placeholder="Address"
+          [errorMessage]="{
+            required: 'Address is required',
+            maxlength: 'Address cannot contain more than 100 characters',
+          }"
+        ></app-form-input>
+        <button type="submit" class="btn btn-primary mt-3">Confirm</button>
+      </form>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,10 @@
+<nav class="admin-sidebar p-3" style="width: 220px">
+  <h5>Admin Panel</h5>
+  <ul class="nav nav-pills flex-column">
+    @for (link of navLinks(); track $index) {
+      <li class="nav-item">
+      <a class="nav-link" routerLink="{{ link.path }}" routerLinkActive="active">{{ link.label }}</a>
+    </li>
+    }
+  </ul>
+</nav>

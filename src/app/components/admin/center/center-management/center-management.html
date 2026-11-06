@@ -1,0 +1,26 @@
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-8 mb-5">
+      <form [formGroup]="searchForm" class="" (ngSubmit)="onSubmit()">
+          <app-form-input [control]="name" label="Center name :" placeholder="Center name"></app-form-input>
+        <button type="submit" class="btn btn-primary mt-3">Search</button>
+      </form>
+    </div>
+  </div>
+  <div class="row justify-content-center">
+    <div class="col-8 mt-3">
+      <app-data-table
+        [columns]="columns"
+        [data]="centers() ?? []"
+        [showActions]="true"
+        (edit)="onEditCenter($event)"
+        (delete)="onDeleteCenter($event)"
+      ></app-data-table>
+    </div>
+  </div>
+  <div class="row justify-content-center">
+    <div class="col-8">
+      <button class="btn btn-primary" routerLink="/admin/centers/create">Add center</button>
+    </div>
+  </div>
+</div>

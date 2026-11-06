@@ -1,0 +1,49 @@
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-8">
+      <form [formGroup]="editForm" (ngSubmit)="editCenter()">
+        <app-form-input
+          [control]="name"
+          label="Center name :"
+          placeholder="Center name"
+          [errorMessage]="{
+            required: 'Name is required',
+            minlength: 'Name cannnot contain less than 4 characters',
+            maxlength: 'Name cannnot contain more than 30 characters',
+          }"
+        ></app-form-input>
+        <app-form-input
+          [control]="address"
+          label="Address :"
+          placeholder="Address"
+          [errorMessage]="{
+            required: 'Address is required',
+            maxlength: 'Address cannot contain more than 100 characters',
+          }"
+        ></app-form-input>
+        <div class="form-group mt-3">
+          <label class="form-label">Sports:</label>
+          <div class="row">
+            @for (sport of sports(); track sport.id) {
+              <div class="col-md-4">
+                <div class="form-check">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    [id]="'sport-' + sport.id"
+                    [checked]="alreadyCheckedIds().includes(sport.id)"
+                    (change)="onSportChange(sport.id, $event)"
+                  />
+                  <label class="form-check-label" [for]="'sport-' + sport.id">
+                    {{ sport.name }}
+                  </label>
+                </div>
+              </div>
+            }
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary mt-3">Confirm</button>
+      </form>
+    </div>
+  </div>
+</div>

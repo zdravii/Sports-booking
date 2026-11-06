@@ -1,0 +1,32 @@
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-8">
+      <form [formGroup]="eidtForm" (ngSubmit)="onSubmit()">
+        <app-form-input
+          [control]="label"
+          label="Court label :"
+          [errorMessage]="{
+            required: 'Court label is required',
+            minlength: 'Court label cannot caontain less than 2 characters',
+            maxlength: 'Court label cannot contain more than 30 characters',
+          }"
+        ></app-form-input>
+        <app-from-select
+          [control]="sportId"
+          label="Sport"
+          [options]="sportOptions()"
+          placeholder="Choose sport..."
+          [errorMessages]="{ min: 'Please select a sport' }"
+        ></app-from-select>
+        <app-from-select
+          [control]="centerId"
+          label="Center"
+          [options]="centerOptions()"
+          placeholder="Choose center..."
+          [errorMessages]="{ min: 'Please center a sport' }"
+        ></app-from-select>
+        <button type="submit" class="btn btn-primary mt-3">Confirm</button>
+      </form>
+    </div>
+  </div>
+</div>

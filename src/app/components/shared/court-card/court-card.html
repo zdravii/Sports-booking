@@ -1,0 +1,18 @@
+<div class="card px-0">
+  <div class="row g-0">
+    <div class="col-4">
+      <img
+        [src]="court.images[0] | fullImageUrl"
+        class="img-fluid rounded-start h-100"
+        alt="{{ court.label }}"
+      />
+    </div>
+    <div class="col-4">
+      <div class="card-body">
+        <h5 class="card-title">{{ court.label }}</h5>
+        <p class="card-text">Status: {{ court.isActive ? 'Active' : 'Inactive' }}</p>
+        <button class="btn btn-primary" [routerLink]="['/court', court.id]">Check court</button>
+      </div>
+    </div>
+  </div>
+</div>

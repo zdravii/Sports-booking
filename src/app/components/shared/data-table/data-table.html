@@ -1,0 +1,43 @@
+<div class="table-responsive">
+  <table class="table">
+    <thead>
+      <tr>
+        @for (col of columns; track col.field) {
+          <th scope="col">{{ col.header }}</th>
+        }
+        @if (showActions) {
+          <th scope="col">Actions</th>
+        }
+      </tr>
+    </thead>
+    <tbody>
+      @for (item of data; track item.id) {
+        <tr>
+          @for (col of columns; track col.field) {
+            <td>
+              @switch (col.type) {
+                @case ('date') {
+                  {{ $any(item[col.field]) | date: 'short' }}
+                }
+                @case ('badge') {
+                  <span class="badge" [class.bg-success]="item[col.field]" [class.bg-danger]="!item[col.field]">
+                    {{ item[col.field] ? 'Yes' : 'No' }}
+                  </span>
+                }
+                @default {
+                  {{ item[col.field] }}
+                }
+              }
+            </td>
+          }
+          @if (showActions) {
+            <td>
+              <button class="btn btn-sm btn-warning me-2" (click)="onEdit(item)">Edit</button>
+              <button class="btn btn-sm btn-danger" (click)="onDelete(item)">Delete</button>
+            </td>
+          }
+        </tr>
+      }
+    </tbody>
+  </table>
+</div>

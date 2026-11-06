@@ -1,0 +1,10 @@
+<div>
+  <h3>{{ center.name }}</h3>
+  <p>{{ center.address }}</p>
+  <ul class="list-group">
+    @for (sport of center.sports; track $index) {
+      <li class="list-group-item">{{ sport }}</li>
+    }
+  </ul>
+  <button class="btn btn-primary mt-2" [routerLink]="['/center', center.id]">Check center</button>
+</div>

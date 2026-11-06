@@ -1,0 +1,51 @@
+@if (isLoading()) {
+  <div class="container mt-5 text-center">
+    <div class="spinner-border" role="status"></div>
+  </div>
+} @else if (errorMessage()) {
+  <div class="container mt-5">
+    <div class="alert alert-danger">{{ errorMessage() }}</div>
+  </div>
+} @else {
+  <div class="container mt-5">
+    @if (center()) {
+      <h2>{{ center()!.name }}</h2>
+      <p>{{ center()!.address }}</p>
+
+      <h5>Sports offered</h5>
+      <ul class="list-group mb-4">
+        @for (sport of center()!.sports; track $index) {
+          <li class="list-group-item">{{ sport }}</li>
+        }
+      </ul>
+    }
+    <div class="row justify-content-center my-5">
+      <div class="col-8">
+        <form [formGroup]="searchForm" (ngSubmit)="onSubmit()">
+          <app-form-input
+            [control]="label"
+            label="Court label :"
+            placeholder="Court label"
+          ></app-form-input>
+          <app-from-select
+            [control]="sportId"
+            label="Sport :"
+            [options]="sportOptions()"
+            placeholder="Choose sport..."
+            [errorMessages]="{ min: 'Please sport a sport' }"
+          ></app-from-select>
+          <button type="submit" class="btn btn-primary mt-2">Search</button>
+        </form>
+      </div>
+    </div>
+    @if (courts().length === 0) {
+      <p>No courts available at this center.</p>
+    } @else {
+      <div class="row justify-content-center">
+        @for (court of courts(); track court.id) {
+          <app-court-card [court]="court" class="col-7 mb-3"></app-court-card>
+        }
+      </div>
+    }
+  </div>
+}

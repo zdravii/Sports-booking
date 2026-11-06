@@ -1,0 +1,39 @@
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-10 mt-3">
+      <form [formGroup]="searchForm" (ngSubmit)="search()">
+        <input type="date" formControlName="date" class="form-control" />
+        <select class="form-control" formControlName="status">
+          <option [ngValue]="null">Select status</option>
+          <option [ngValue]="1">Confirmed</option>
+          <option [ngValue]="2">Cancelled</option>
+          <option [ngValue]="3">Completed</option>
+        </select>
+        <app-from-select
+          [control]="centerId"
+          label="Center"
+          [options]="centerOptions()"
+          placeholder="Choose center..."
+          [errorMessages]="{ min: 'Please center a sport' }"
+        ></app-from-select>
+        <app-from-select
+          [control]="courtId"
+          label="Court"
+          [options]="courtOptions()"
+          placeholder="Choose court..."
+          [errorMessages]="{ min: 'Please court a sport' }"
+        ></app-from-select>
+        <button type="submit" class="btn btn-primary mt-3">Search</button>
+      </form>
+    </div>
+  </div>
+  <div class="row justify-content-center">
+    <div class="col-10 mt-3">
+      <app-data-table
+        [columns]="columns"
+        [data]="reservations() ?? []"
+        [showActions]="false"
+      ></app-data-table>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,29 @@
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-8 mt-3">
+      <form [formGroup]="searchForm" (ngSubmit)="search()">
+        <app-form-input [control]="userEmail" label="User email :" placeholder="User email"></app-form-input>
+        <select formControlName="isActive" class="form-control">
+          <option [ngValue]="null">Select status...</option>
+          <option [ngValue]="true">Active</option>
+          <option [ngValue]="false">Inactive</option>
+        </select>
+        <select formControlName="roleId" class="form-control">
+          <option [ngValue]="null">Select role...</option>
+          <option [ngValue]="5">User</option>
+          <option [ngValue]="4">Admin</option>
+        </select>
+        <button class="btn btn-primary" type="submit">Search</button>
+      </form>
+    </div>
+  </div>
+  <div class="row justify-content-center">
+    <div class="col-8 mt-3">
+      <app-data-table
+        [columns]="columns"
+        [data]="users() ?? []"
+        [showActions]="false"
+      ></app-data-table>
+    </div>
+  </div>
+</div>

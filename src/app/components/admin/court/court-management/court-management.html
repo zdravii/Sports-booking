@@ -1,0 +1,46 @@
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-8 mb-5">
+      <form [formGroup]="searchForm" (ngSubmit)="search()">
+        <app-form-input
+          [control]="label"
+          label="Court label :"
+          placeholder="Label"
+        ></app-form-input>
+        <app-from-select
+          [control]="sportId"
+          label="Sport"
+          [options]="sportOptions()"
+          placeholder="Choose sport..."
+          [errorMessages]="{ min: 'Please select a sport' }"
+        ></app-from-select>
+        <app-from-select
+          [control]="centerId"
+          label="Center"
+          [options]="centerOptions()"
+          placeholder="Choose center..."
+          [errorMessages]="{ min: 'Please center a sport' }"
+        ></app-from-select>
+        <div>
+          <button type="submit" class="btn btn-primary mt-3">Search</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="row justify-content-center">
+    <div class="col-8 mt-3">
+      <app-data-table
+        [columns]="columns"
+        [data]="courts() ?? []"
+        [showActions]="true"
+        (edit)="onEditCourt($event)"
+        (delete)="onDeleteCourt($event)"
+      ></app-data-table>
+    </div>
+  </div>
+  <div class="row justify-content-center">
+    <div class="col-8">
+      <button class="btn btn-primary" routerLink="/admin/courts/create">Add court</button>
+    </div>
+  </div>
+</div>

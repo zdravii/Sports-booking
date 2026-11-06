@@ -1,0 +1,81 @@
+<div class="container">
+  <div class="row justify-content-center mt-5">
+    <div class="col-6">
+      <div class="row">
+        <div class="col-12">
+          <img
+            [src]="court()?.images?.[0] | fullImageUrl"
+            [alt]="court()?.label"
+            class="img-fluid"
+          />
+          <h3>{{ court()?.label }}</h3>
+          <span
+            class="badge"
+            [class.bg-success]="court()?.isActive"
+            [class.bg-danger]="!court()?.isActive"
+          >
+            {{ court()?.isActive ? 'Active' : 'Inactive' }}
+          </span>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12"></div>
+      </div>
+    </div>
+    <div class="col-6">
+      <h2 class="text-center">Book your appointment</h2>
+      <form [formGroup]="reservationForm" (ngSubmit)="reserve()">
+        <input
+          type="date"
+          class="form-control mt-2"
+          name="date"
+          formControlName="date"
+          [min]="minDate"
+        />
+        @if (
+          reservationForm.get('date')?.touched &&
+          (reservationForm.hasError('dateInPast') || reservationForm.hasError('dateIsSunday'))
+        ) {
+          <div class="text-danger mt-1">
+            {{ reservationFormError }}
+          </div>
+        }
+        @if (
+          reservationForm.get('date')?.touched && reservationForm.get('date')?.hasError('required')
+        ) {
+          <div class="text-danger mt-1">Date is required.</div>
+        }
+        <input
+          type="time"
+          class="form-control mt-2"
+          name="time"
+          formControlName="time"
+          step="3600"
+        />
+        @if (
+          reservationForm.get('time')?.touched &&
+          (reservationForm.hasError('notFullHour') ||
+            reservationForm.hasError('outsideWorkingHours') ||
+            reservationForm.hasError('timeInPast'))
+        ) {
+          <div class="text-danger mt-1">
+            {{ reservationFormError }}
+          </div>
+        }
+        @if (
+          reservationForm.get('time')?.touched && reservationForm.get('time')?.hasError('required')
+        ) {
+          <div class="text-danger mt-1">Time is required.</div>
+        }
+        <button type="submit" class="btn btn-primary mt-2" [disabled]="!authService.isLoggedIn()">
+          Reserve
+        </button>
+      </form>
+      @if (!authService.isLoggedIn()) {
+        <div class="alert alert-warning mt-3 text-center">
+          <p class="mb-2">You need to be logged in to book an appointment.</p>
+        </div>
+      }
+    </div>
+  </div>
+</div>

@@ -1,0 +1,8 @@
+[
+  { "label": "Home", "path": "/" },
+  { "label": "Login", "path": "/login" },
+  { "label": "Register", "path": "/register" },
+  { "label": "Admin panel", "path": "/admin", "requredAuth": true, "requiresRole": "Admin" },
+  { "label": "Reservations", "path": "/reservations", "requredAuth": true, "requiresRole": "User" },
+  { "label": "Logout", "action": "logout", "requredAuth": true }
+]

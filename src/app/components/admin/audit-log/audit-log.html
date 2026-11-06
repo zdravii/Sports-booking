@@ -1,0 +1,55 @@
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-8 mb-5">
+      <form [formGroup]="searchForm" (ngSubmit)="onSubmit()" class="form">
+        <app-form-input
+          [control]="userEmail"
+          label="User email :"
+          placeholder="User email"
+        ></app-form-input>
+        <app-form-input
+          [control]="auditLogName"
+          label="AuditLog name :"
+          placeholder="AuditLog name"
+        ></app-form-input>
+        <div class="form-group">
+          <label for="dateFrom" class="form-label">From:</label>
+          <input type="date" name="dateFrom" formControlName="dateFrom" class="form-control" />
+        </div>
+        <div class="form-group">
+          <label for="dateTo" class="form-label">To:</label>
+          <input type="date" name="dateTo" formControlName="dateTo" class="form-control" />
+        </div>
+        <button type="submit" class="btn btn-primary">Search</button>
+      </form>
+    </div>
+  </div>
+  <div class="row justify-content-center">
+    <div class="col-8 mt-3">
+      <div class="table-responsive">
+        <app-data-table
+          [columns]="columns"
+          [data]="auditLogs() ?? []"
+          [showActions]="false"
+        ></app-data-table>
+      </div>
+      <nav aria-label="Audit log pagination" class="mt-3">
+        <ul class="pagination justify-content-center">
+          <li class="page-item" [class.disabled]="currentPage() === 1">
+            <button class="page-link" (click)="previousPage()">Previous</button>
+          </li>
+
+          @for (page of pageNumbers; track page) {
+            <li class="page-item" [class.active]="page === currentPage()">
+              <button class="page-link" (click)="goToPage(page)">{{ page }}</button>
+            </li>
+          }
+
+          <li class="page-item" [class.disabled]="currentPage() === totalPages()">
+            <button class="page-link" (click)="nextPage()">Next</button>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</div>

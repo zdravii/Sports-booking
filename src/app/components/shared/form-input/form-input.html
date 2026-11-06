@@ -1,0 +1,19 @@
+<div class="form-group mt-2">
+  <label class="form-label">{{ label }}</label>
+  <input
+    [type]="type"
+    class="form-control"
+    [formControl]="control"
+    [placeholder]="placeholder"
+    [class.is-invalid]="control?.invalid && control?.touched"
+  />
+  @if (control?.invalid && control?.touched) {
+    <div class="invalid-feedback d-block">
+        @for (key of errorKeys; track key) {
+            @if (errorMessage[key]) {
+                <span>{{ errorMessage[key] }}</span>
+            }
+        }
+    </div>
+  }
+</div>
